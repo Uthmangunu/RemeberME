@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Clean, Professional Dark Theme */
+    --background: 222 13% 9%; /* Clean dark gray-blue */
+    --foreground: 0 0% 98%; /* Pure white */
+    --card: 217 19% 12%; /* Slightly lighter card background */
+    --card-foreground: 0 0% 98%;
+    --popover: 217 19% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 221 83% 53%; /* Professional blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 10% 18%; /* Subtle gray */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 217 10% 15%;
+    --muted-foreground: 215 16% 57%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 19% 18%; /* Subtle borders */
+    --input: 217 19% 18%;
+    --ring: 221 83% 53%;
+    --radius: 0.5rem; /* Subtle rounded corners */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Smooth transitions for interactive elements */
+  button, a, [role="button"] {
+    @apply transition-all duration-200;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent;
+  }
+}
+
+@layer utilities {
+  /* Subtle card hover effects - professional, no scaling */
+  .card-hover {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .card-hover:hover {
+    @apply border-primary/40 shadow-xl shadow-primary/10;
+  }
+
+  /* Professional card component */
+  .professional-card {
+    @apply rounded-lg border border-border bg-card p-6 transition-all duration-200;
+  }
+
+  .professional-card:hover {
+    @apply border-primary/40 shadow-lg shadow-primary/5;
+  }
+
+  /* Subtle accent indicators - no bright gradients */
+  .accent-bar-blue {
+    border-left: 3px solid hsl(221 83% 53%);
+  }
+
+  .accent-bar-indigo {
+    border-left: 3px solid hsl(239 84% 67%);
+  }
+
+  .accent-bar-violet {
+    border-left: 3px solid hsl(258 90% 66%);
+  }
+
+  .accent-bar-emerald {
+    border-left: 3px solid hsl(160 84% 39%);
+  }
+
+  .accent-bar-amber {
+    border-left: 3px solid hsl(38 92% 50%);
+  }
+
+  /* Subtle status colors */
+  .status-active {
+    @apply bg-emerald-500/10 text-emerald-500 border-emerald-500/30;
+  }
+
+  .status-pending {
+    @apply bg-amber-500/10 text-amber-500 border-amber-500/30;
+  }
+
+  .status-inactive {
+    @apply bg-slate-500/10 text-slate-400 border-slate-500/30;
+  }
+}
