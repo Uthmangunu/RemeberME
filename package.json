@@ -1,0 +1,35 @@
+{
+  "name": "remeberme",
+  "version": "1.0.0",
+  "description": "A context bank for LLM's to have deep portable context of you on one platform with a unified ui to aid in the matter",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Uthmangunu/RemeberME.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Uthmangunu/RemeberME/issues"
+  },
+  "homepage": "https://github.com/Uthmangunu/RemeberME#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.23.0",
+    "@supabase/supabase-js": "^2.86.0",
+    "dotenv": "^17.2.3",
+    "openai": "^6.9.1",
+    "pdf-parse": "^2.4.5",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/pdf-parse": "^1.1.5",
+    "typescript": "^5.9.3"
+  }
+}
