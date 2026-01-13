@@ -62,7 +62,7 @@ export function TopNav() {
               <button
                 type="button"
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center justify-center h-10 w-10 border-2 border-navy hover:bg-navy hover:text-white transition-all"
+                className="flex items-center justify-center h-10 w-10 border-2 border-navy hover:bg-navy hover:text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label="User menu"
               >
                 <User className="h-5 w-5" />

@@ -40,29 +40,33 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="w-full max-w-md space-y-8 px-4">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight">
-            Welcome back
-          </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to your RemeberME account
-          </p>
-        </div>
+    <div className="flex min-h-screen items-center justify-center bg-muted">
+      <div className="w-full max-w-md px-4">
+        <div className="geometric-card border-accent-navy bg-white space-y-8">
+          <div className="space-y-4">
+            <div className="h-12 w-12 bg-navy flex items-center justify-center">
+              <span className="text-white font-bold text-xl">R</span>
+            </div>
+            <div>
+              <h2 className="text-title text-navy">Welcome back</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Sign in to your RememberME account
+              </p>
+            </div>
+          </div>
 
-        <form onSubmit={handleLogin} className="mt-8 space-y-6">
+          <form onSubmit={handleLogin} className="space-y-6">
           {error && (
-            <div className="rounded-lg bg-destructive/10 p-4 text-sm text-destructive">
+            <div className="border-2 border-destructive bg-destructive/10 p-4 text-sm text-destructive">
               {error}
             </div>
           )}
 
-          <div className="space-y-4">
+          <div className="space-y-5">
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium mb-2"
+                className="block text-sm font-bold text-navy mb-2"
               >
                 Email address
               </label>
@@ -74,7 +78,7 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-lg border border-input bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                className="input-base"
                 placeholder="you@example.com"
               />
             </div>
@@ -82,7 +86,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium mb-2"
+                className="block text-sm font-bold text-navy mb-2"
               >
                 Password
               </label>
@@ -94,7 +98,7 @@ export default function LoginPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-input bg-background px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                className="input-base"
                 placeholder="••••••••"
               />
             </div>
@@ -104,7 +108,7 @@ export default function LoginPage() {
             <div className="text-sm">
               <Link
                 href="/forgot-password"
-                className="text-primary hover:text-primary/90"
+                className="text-navy hover:text-navy/80 font-semibold"
               >
                 Forgot your password?
               </Link>
@@ -114,7 +118,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary w-full"
           >
             {loading ? 'Signing in...' : 'Sign in'}
           </button>
@@ -123,12 +127,13 @@ export default function LoginPage() {
             Don't have an account?{' '}
             <Link
               href="/signup"
-              className="font-medium text-primary hover:text-primary/90"
+              className="font-semibold text-navy hover:text-navy/80"
             >
               Sign up
             </Link>
           </p>
         </form>
+        </div>
       </div>
     </div>
   );
