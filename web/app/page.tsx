@@ -1,90 +1,176 @@
 import Link from 'next/link';
-import { ArrowRight, Sparkles, Database, Share2 } from 'lucide-react';
+import { Brain, Zap, Lock, Share2 } from 'lucide-react';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-20 max-w-6xl">
-        <div className="text-center space-y-8 mb-20">
-          {/* Logo */}
-          <div className="inline-flex h-20 w-20 rounded-2xl border border-primary/30 bg-primary/10 items-center justify-center mb-4">
-            <Database className="h-10 w-10 text-primary" />
+      {/* Hero Section - Navy Block */}
+      <section className="bg-navy section-block text-white">
+        <div className="container mx-auto max-w-7xl">
+          <div className="max-w-4xl fade-in-up">
+            <h1 className="text-display mb-8">
+              Remember<span className="text-yellow">ME</span>
+            </h1>
+            <p className="text-2xl md:text-3xl mb-12 leading-relaxed opacity-90">
+              Your personal memory bank for AI. Store contexts, craft prompts, and never repeat yourself again.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/signup"
+                className="inline-flex items-center justify-center px-8 py-4 bg-yellow text-navy font-bold text-lg hover:bg-opacity-90 transition-all"
+              >
+                Get Started →
+              </Link>
+              <Link
+                href="/login"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-navy transition-all"
+              >
+                Sign In
+              </Link>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <h1 className="text-6xl md:text-7xl font-bold tracking-tight">
-            Remeber<span className="text-primary">ME</span>
-          </h1>
+      {/* Features Grid - Modular Blocks */}
+      <section className="grid md:grid-cols-2 lg:grid-cols-4">
+        <FeatureBlock
+          title="Memories"
+          description="Store personal context, preferences, and information that AI should remember about you"
+          color="bg-cyan"
+          icon={<Brain className="h-12 w-12" />}
+        />
+        <FeatureBlock
+          title="Prompts"
+          description="Craft and organize reusable prompts for common tasks and workflows"
+          color="bg-orange"
+          icon={<Zap className="h-12 w-12" />}
+        />
+        <FeatureBlock
+          title="Privacy"
+          description="Your data stays yours. Secure, encrypted, and fully under your control"
+          color="bg-lime"
+          icon={<Lock className="h-12 w-12" />}
+        />
+        <FeatureBlock
+          title="Export"
+          description="Share contexts with any AI assistant in multiple formats"
+          color="bg-lavender"
+          icon={<Share2 className="h-12 w-12" />}
+        />
+      </section>
 
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Your personal context bank for AI interactions.{' '}
-            <span className="text-foreground font-medium">
-              Store, organize, and share contexts
-            </span>{' '}
-            with any LLM.
+      {/* How It Works - Yellow Block */}
+      <section className="bg-yellow section-block">
+        <div className="container mx-auto max-w-7xl">
+          <h2 className="text-headline text-navy mb-16">How it works</h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            <Step
+              number="01"
+              title="Create Memories"
+              description="Add information about yourself, your work, preferences, and context"
+            />
+            <Step
+              number="02"
+              title="Build Prompts"
+              description="Save and organize prompts you use frequently across different AI tools"
+            />
+            <Step
+              number="03"
+              title="Share Context"
+              description="Export and share your contexts with AI assistants for personalized responses"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases - Coral Block */}
+      <section className="bg-coral section-block text-white">
+        <div className="container mx-auto max-w-7xl">
+          <h2 className="text-headline mb-16">Perfect for</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <UseCase
+              title="Developers"
+              description="Store your tech stack, coding preferences, and project contexts. Get AI responses tailored to your development environment."
+            />
+            <UseCase
+              title="Writers & Creators"
+              description="Save your writing style, tone preferences, and project details. Maintain consistency across all your AI-assisted work."
+            />
+            <UseCase
+              title="Professionals"
+              description="Keep work contexts, client information, and common prompts organized. Streamline your AI-powered workflows."
+            />
+            <UseCase
+              title="Researchers"
+              description="Organize research contexts, methodology notes, and domain-specific prompts for more accurate AI assistance."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* CTA - Navy Block */}
+      <section className="bg-navy section-block text-white">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="text-headline mb-8">Start building your AI memory bank</h2>
+          <p className="text-xl mb-12 opacity-90">
+            Join RememberME and make every AI conversation more personal and productive
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-6">
-            <Link
-              href="/signup"
-              className="group inline-flex items-center space-x-2 bg-primary px-8 py-4 rounded-xl text-primary-foreground font-semibold hover:shadow-lg transition-shadow"
-            >
-              <span>Get Started</span>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/login"
-              className="inline-flex items-center space-x-2 border-2 border-border px-8 py-4 rounded-xl font-semibold hover:bg-card transition-colors"
-            >
-              <span>Sign In</span>
-            </Link>
-          </div>
+          <Link
+            href="/signup"
+            className="inline-flex items-center justify-center px-12 py-5 bg-cyan text-navy font-bold text-xl hover:bg-opacity-90 transition-all"
+          >
+            Create Free Account →
+          </Link>
         </div>
-
-        {/* Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mt-20">
-          <FeatureCard
-            icon={<Sparkles className="h-8 w-8" />}
-            title="Smart Organization"
-            description="AI-powered categorization and tagging for your contexts"
-            tone="tone-primary"
-          />
-          <FeatureCard
-            icon={<Database className="h-8 w-8" />}
-            title="Context Management"
-            description="Store and manage all your AI contexts in one place"
-            tone="tone-secondary"
-          />
-          <FeatureCard
-            icon={<Share2 className="h-8 w-8" />}
-            title="Universal Export"
-            description="Export to any LLM platform in multiple formats"
-            tone="tone-muted"
-          />
-        </div>
-      </div>
+      </section>
     </main>
   );
 }
 
-function FeatureCard({
-  icon,
+function FeatureBlock({
   title,
   description,
-  tone,
+  color,
+  icon,
 }: {
-  icon: React.ReactNode;
   title: string;
   description: string;
-  tone: string;
+  color: string;
+  icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-8 space-y-4 card-hover">
-      <div className={`inline-flex p-4 rounded-xl ${tone}`}>
-        <div className="text-primary">{icon}</div>
-      </div>
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
+    <div className={`${color} section-block-sm text-navy`}>
+      <div className="mb-6 opacity-80">{icon}</div>
+      <h3 className="text-title mb-4">{title}</h3>
+      <p className="text-lg opacity-80">{description}</p>
+    </div>
+  );
+}
+
+function Step({
+  number,
+  title,
+  description,
+}: {
+  number: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div>
+      <div className="text-6xl font-bold text-navy opacity-20 mb-4">{number}</div>
+      <h3 className="text-2xl font-bold text-navy mb-3">{title}</h3>
+      <p className="text-lg text-navy opacity-80">{description}</p>
+    </div>
+  );
+}
+
+function UseCase({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="border-2 border-white p-8">
+      <h3 className="text-2xl font-bold mb-4">{title}</h3>
+      <p className="text-lg opacity-90">{description}</p>
     </div>
   );
 }

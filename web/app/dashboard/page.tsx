@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { Plus, Pencil, FileText } from 'lucide-react';
+import Link from 'next/link';
+import { Brain, Zap, ArrowRight } from 'lucide-react';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -13,111 +14,106 @@ export default async function DashboardPage() {
     redirect('/login');
   }
 
+  // Fetch counts
+  const { data: memories } = await supabase
+    .from('documents')
+    .select('id')
+    .eq('user_id', user.id);
+
+  const { data: prompts } = await supabase
+    .from('prompts')
+    .select('id')
+    .eq('user_id', user.id);
+
+  const memoriesCount = memories?.length || 0;
+  const promptsCount = prompts?.length || 0;
+
   return (
-    <div className="space-y-10">
-      <header className="space-y-3">
-        <div className="inline-flex items-center rounded-full border border-border bg-card px-3 py-1 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          Memory Workspace
-        </div>
-        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">Memories</h1>
-        <p className="text-muted-foreground text-lg max-w-2xl">
-          Create, refine, and organize memories with a clean, professional workflow.
-        </p>
-      </header>
-
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <MemoryCard
-          href="/dashboard/contexts/new"
-          title="Create Memory"
-          description="Capture a new memory with structured context and intent."
-          icon={<Plus className="h-6 w-6" />}
-          step="01"
-        />
-
-        <MemoryCard
-          href="/dashboard/contexts"
-          title="Edit Memory"
-          description="Review, update, and refine existing memories."
-          icon={<Pencil className="h-6 w-6" />}
-          step="02"
-        />
-      </section>
-
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <StatCard label="Total Memories" value="0" />
-        <StatCard label="Edited This Week" value="0" />
-        <StatCard label="Ready for AI" value="0" />
-      </section>
-
-      <section className="rounded-2xl border border-border bg-card p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold tracking-tight">Recent Activity</h2>
-          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Last 30 days
-          </span>
-        </div>
-        <div className="text-center py-10">
-          <div className="inline-flex h-14 w-14 rounded-full bg-muted items-center justify-center mb-4">
-            <FileText className="h-6 w-6 text-muted-foreground" />
-          </div>
-          <p className="text-muted-foreground">
-            No activity yet. Create your first memory to get started.
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="bg-navy section-block text-white border-b-4 border-navy">
+        <div className="container mx-auto max-w-7xl">
+          <h1 className="text-display mb-6">Dashboard</h1>
+          <p className="text-2xl opacity-90 max-w-3xl">
+            Manage your memories and prompts. Build a personal knowledge base for AI.
           </p>
         </div>
       </section>
-    </div>
-  );
-}
 
-function MemoryCard({
-  href,
-  title,
-  description,
-  icon,
-  step,
-}: {
-  href: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  step: string;
-}) {
-  return (
-    <a
-      href={href}
-      className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 card-hover cursor-pointer"
-    >
-      <div className="relative z-10 space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="inline-flex items-center justify-center h-12 w-12 rounded-xl border border-primary/30 bg-primary/10 text-primary">
-            {icon}
+      {/* Main Content Grid */}
+      <section className="grid md:grid-cols-2">
+        {/* Memories Section */}
+        <Link
+          href="/dashboard/memories"
+          className="section-block bg-cyan text-navy hover:opacity-90 transition-opacity border-r-4 border-b-4 border-navy group"
+        >
+          <div className="flex items-start justify-between mb-8">
+            <Brain className="h-16 w-16 opacity-80" />
+            <ArrowRight className="h-8 w-8 opacity-60 group-hover:translate-x-2 transition-transform" />
           </div>
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Step {step}
-          </span>
-        </div>
-        <div>
-          <h3 className="text-2xl font-semibold mb-2 tracking-tight">{title}</h3>
-          <p className="text-sm text-muted-foreground">{description}</p>
-        </div>
-      </div>
+          <h2 className="text-headline mb-4">Memories</h2>
+          <p className="text-xl opacity-80 mb-6">
+            Personal context and information that AI should remember about you
+          </p>
+          <div className="flex items-baseline space-x-3">
+            <span className="text-6xl font-bold">{memoriesCount}</span>
+            <span className="text-lg uppercase font-bold tracking-wider">
+              {memoriesCount === 1 ? 'Memory' : 'Memories'}
+            </span>
+          </div>
+        </Link>
 
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-primary/5" />
-    </a>
-  );
-}
+        {/* Prompts Section */}
+        <Link
+          href="/dashboard/prompts"
+          className="section-block bg-orange text-navy hover:opacity-90 transition-opacity border-b-4 border-navy group"
+        >
+          <div className="flex items-start justify-between mb-8">
+            <Zap className="h-16 w-16 opacity-80" />
+            <ArrowRight className="h-8 w-8 opacity-60 group-hover:translate-x-2 transition-transform" />
+          </div>
+          <h2 className="text-headline mb-4">Prompts</h2>
+          <p className="text-xl opacity-80 mb-6">
+            Reusable prompts for common tasks and workflows
+          </p>
+          <div className="flex items-baseline space-x-3">
+            <span className="text-6xl font-bold">{promptsCount}</span>
+            <span className="text-lg uppercase font-bold tracking-wider">
+              {promptsCount === 1 ? 'Prompt' : 'Prompts'}
+            </span>
+          </div>
+        </Link>
+      </section>
 
-function StatCard({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-border bg-card p-6">
-      <div className="text-2xl font-semibold">{value}</div>
-      <p className="text-sm text-muted-foreground">{label}</p>
+      {/* Quick Actions */}
+      <section className="section-block bg-background">
+        <div className="container mx-auto max-w-7xl">
+          <h2 className="text-title mb-8">Quick Actions</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Link
+              href="/dashboard/memories/new"
+              className="geometric-card border-l-8 border-cyan hover:-translate-y-1 transition-transform"
+            >
+              <Brain className="h-8 w-8 text-cyan mb-4" />
+              <h3 className="text-xl font-bold mb-2">Create Memory</h3>
+              <p className="text-muted-foreground">
+                Add new personal context for AI to remember
+              </p>
+            </Link>
+
+            <Link
+              href="/dashboard/prompts/new"
+              className="geometric-card border-l-8 border-orange hover:-translate-y-1 transition-transform"
+            >
+              <Zap className="h-8 w-8 text-orange mb-4" />
+              <h3 className="text-xl font-bold mb-2">Create Prompt</h3>
+              <p className="text-muted-foreground">
+                Save a reusable prompt for common tasks
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

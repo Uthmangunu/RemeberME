@@ -4,27 +4,45 @@
 
 @layer base {
   :root {
-    /* Clean, Professional Dark Theme */
-    --background: 222 13% 9%; /* Clean dark gray-blue */
-    --foreground: 0 0% 98%; /* Pure white */
-    --card: 217 19% 12%; /* Slightly lighter card background */
-    --card-foreground: 0 0% 98%;
-    --popover: 217 19% 12%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 221 83% 53%; /* Professional blue */
+    /* Dropbox-Inspired Bold Color System */
+    --background: 0 0% 100%; /* Pure white */
+    --foreground: 220 30% 15%; /* Deep navy text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+
+    --primary: 220 40% 25%; /* Navy blue */
     --primary-foreground: 0 0% 100%;
-    --secondary: 217 10% 18%; /* Subtle gray */
-    --secondary-foreground: 0 0% 98%;
-    --muted: 217 10% 15%;
-    --muted-foreground: 215 16% 57%;
-    --accent: 221 83% 53%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 217 19% 18%; /* Subtle borders */
-    --input: 217 19% 18%;
-    --ring: 221 83% 53%;
-    --radius: 0.5rem; /* Subtle rounded corners */
+
+    --secondary: 46 90% 65%; /* Warm yellow */
+    --secondary-foreground: 220 30% 15%;
+
+    --muted: 220 10% 95%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 194 75% 60%; /* Bright cyan */
+    --accent-foreground: 220 30% 15%;
+
+    --destructive: 4 90% 58%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 220 40% 25%;
+
+    --radius: 0rem; /* Sharp, geometric corners */
+
+    /* Brand color palette */
+    --navy: 220 40% 25%;
+    --yellow: 46 90% 65%;
+    --cyan: 194 75% 60%;
+    --orange: 28 85% 60%;
+    --lime: 82 70% 55%;
+    --coral: 14 90% 62%;
+    --lavender: 260 50% 75%;
   }
 }
 
@@ -34,84 +52,155 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Smooth transitions for interactive elements */
-  button, a, [role="button"] {
-    @apply transition-all duration-200;
+  /* Clean typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
   }
 
-  /* Custom scrollbar */
+  /* Smooth transitions */
+  button, a, [role="button"] {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* Minimal scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-background;
+    @apply bg-transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted rounded-full;
+    @apply bg-muted;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-accent;
+    @apply bg-muted-foreground;
   }
 }
 
 @layer utilities {
-  /* Subtle card hover effects - professional, no scaling */
-  .card-hover {
-    @apply transition-all duration-200 ease-in-out;
+  /* Bold brand colors - Dropbox style */
+  .bg-navy {
+    background-color: hsl(var(--navy));
   }
 
-  .card-hover:hover {
-    @apply border-primary/40 shadow-xl shadow-primary/10;
+  .bg-yellow {
+    background-color: hsl(var(--yellow));
   }
 
-  /* Professional card component */
-  .professional-card {
-    @apply rounded-lg border border-border bg-card p-6 transition-all duration-200;
+  .bg-cyan {
+    background-color: hsl(var(--cyan));
   }
 
-  .professional-card:hover {
-    @apply border-primary/40 shadow-lg shadow-primary/5;
+  .bg-orange {
+    background-color: hsl(var(--orange));
   }
 
-  /* Subtle accent indicators - no bright gradients */
-  .accent-bar-blue {
-    border-left: 3px solid hsl(221 83% 53%);
+  .bg-lime {
+    background-color: hsl(var(--lime));
   }
 
-  .accent-bar-indigo {
-    border-left: 3px solid hsl(239 84% 67%);
+  .bg-coral {
+    background-color: hsl(var(--coral));
   }
 
-  .accent-bar-violet {
-    border-left: 3px solid hsl(258 90% 66%);
+  .bg-lavender {
+    background-color: hsl(var(--lavender));
   }
 
-  .accent-bar-emerald {
-    border-left: 3px solid hsl(160 84% 39%);
+  /* Text colors */
+  .text-navy {
+    color: hsl(var(--navy));
   }
 
-  .accent-bar-amber {
-    border-left: 3px solid hsl(38 92% 50%);
+  .text-yellow {
+    color: hsl(var(--yellow));
   }
 
-  /* Subtle status colors */
-  .status-active {
-    @apply bg-emerald-500/10 text-emerald-500 border-emerald-500/30;
+  .text-cyan {
+    color: hsl(var(--cyan));
   }
 
-  .status-pending {
-    @apply bg-amber-500/10 text-amber-500 border-amber-500/30;
+  /* Modular section blocks - Dropbox grid style */
+  .section-block {
+    @apply p-12 md:p-16 lg:p-20;
   }
 
-  .status-inactive {
-    @apply bg-slate-500/10 text-slate-400 border-slate-500/30;
+  .section-block-sm {
+    @apply p-8 md:p-12;
+  }
+
+  /* Geometric cards with sharp edges */
+  .geometric-card {
+    @apply border-2 border-border bg-card p-8 transition-all duration-300;
+  }
+
+  .geometric-card:hover {
+    @apply -translate-y-1 shadow-2xl;
+  }
+
+  /* Bold accent borders */
+  .border-accent-navy {
+    border-color: hsl(var(--navy));
+  }
+
+  .border-accent-yellow {
+    border-color: hsl(var(--yellow));
+  }
+
+  .border-accent-cyan {
+    border-color: hsl(var(--cyan));
+  }
+
+  /* Typography scale */
+  .text-display {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight;
+  }
+
+  .text-headline {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+  }
+
+  .text-title {
+    @apply text-2xl md:text-3xl font-bold tracking-tight;
+  }
+
+  /* Animations - smooth and professional */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .stagger-1 {
+    animation-delay: 0.1s;
+  }
+
+  .stagger-2 {
+    animation-delay: 0.2s;
+  }
+
+  .stagger-3 {
+    animation-delay: 0.3s;
+  }
+
+  .stagger-4 {
+    animation-delay: 0.4s;
   }
 }
